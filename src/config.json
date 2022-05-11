@@ -1,0 +1,8 @@
+{
+    "GET_CURRENCIES_URL": "https://v6.exchangerate-api.com/v6/e18c387f56370f31b439c45d/codes",
+    "GET_EXCHANGE_RATE_URL": "https://v6.exchangerate-api.com/v6/e18c387f56370f31b439c45d/pair/",
+    "GET_HISTORICAL_DATA_URL": "https://v6.exchangerate-api.com/v6/YOUR-API-KEY/history/USD/YEAR/MONTH/DAY"
+    
+        
+ }
+

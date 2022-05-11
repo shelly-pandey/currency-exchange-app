@@ -1,4 +1,5 @@
 import { Dispatch } from 'redux';
+import configData from '../config.json';
 
 //Currency type can be imported if needed in future
 //import { Currency } from './types';
@@ -29,7 +30,7 @@ export function getCurrencies(currencyList: string[]): GetCurrenciesAction {
 //fetching all supported currencies
 export function fetchCurrencies() {
     return (dispatch: Dispatch) => {
-        fetch("https://v6.exchangerate-api.com/v6/e18c387f56370f31b439c45d/codes")
+        fetch(configData.GET_CURRENCIES_URL)
             .then((response) => response.json())
             .then((data) => dispatch(getCurrencies(data.supported_codes)));
     };

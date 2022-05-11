@@ -1,6 +1,7 @@
 import { useEffect, useState, useCallback } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { rootState } from '../redux/currencyReducer';
+import configData from '../config.json';
 
 import { getBaseCurrency, getFromAmount, getTargetCurrency } from "../redux/action";
 
@@ -8,6 +9,8 @@ import Box from '@mui/material/Box';
 import FormControl from '@mui/material/FormControl';
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
+
+import ArrowDropDownCircleIcon from '@mui/icons-material/ArrowDropDownCircle';
 
 
 
@@ -19,16 +22,14 @@ export default function Main() {
   let baseCurrency = useSelector((state: rootState) => state.baseCurrency);
   let targetCurrency = useSelector((state: rootState) => state.targetCurrency);
   let fromAmount = useSelector((state: rootState) => state.fromAmount);
-
-  const GET_EXCHANGE_RATE_URL = "https://v6.exchangerate-api.com/v6/e18c387f56370f31b439c45d/pair/";
-
   const [toAmount, setToAmount] = useState();
   const [error, setError] = useState('');
+  
 
   //fetching the conversion result . 
   useEffect(() => {
     if (fromAmount && baseCurrency && targetCurrency) {
-      let url = GET_EXCHANGE_RATE_URL.concat(baseCurrency).concat("/").concat(targetCurrency).concat("/").concat(fromAmount);
+      let url = configData.GET_EXCHANGE_RATE_URL.concat(baseCurrency).concat("/").concat(targetCurrency).concat("/").concat(fromAmount);
       console.log(url);
       fetch(url)
         .then((response) => {
@@ -102,9 +103,8 @@ export default function Main() {
           />
 
         </FormControl>
-
       </Box>
-
+      
       <Box sx={{ minWidth: 220 }}>
         <FormControl sx={{ m: 1, minWidth: 80 }}>
           <Autocomplete
@@ -116,13 +116,11 @@ export default function Main() {
             onChange={handleChangeTargetCurrency}
             renderInput={(currency) => <TextField {...currency} label="Convert to..." />}
           />
-
-
         </FormControl>
       </Box>
+      <svg className="bounce" data-testid=""><ArrowDropDownCircleIcon fontSize="small"/></svg>
 
-      <Box component="form" sx={{ '& > :not(style)':  { m: 1, width: '25ch' }  }} >
-        
+      <Box component="form" sx={{ m: 1, width: '25ch' }} >
         Output:  {toAmount}  <div className="error"> {error}</div>
       </Box>
 

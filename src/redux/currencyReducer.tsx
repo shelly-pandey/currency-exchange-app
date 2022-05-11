@@ -13,7 +13,7 @@ const initialState: InitialState = {
     currencyList: [],
     baseCurrency: '',
     targetCurrency: '',
-    fromAmount: 0,
+    fromAmount: 1,
     toAmount: 0
 };
 

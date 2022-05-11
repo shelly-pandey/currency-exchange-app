@@ -1,10 +1,12 @@
 import Main from './components/main';
+import Footer from './components/footer';
 
 import { fetchCurrencies } from "./redux/action";
 import { useEffect } from "react";
 import { useDispatch } from 'react-redux';
 
 import './App.css';
+
 
 
 export default function App() {
@@ -16,9 +18,8 @@ export default function App() {
 
   return (
     <>
-
       <Main />
-      
+      <Footer />
     </>
   );
 }
