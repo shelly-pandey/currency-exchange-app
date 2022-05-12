@@ -13,6 +13,7 @@
 -Enter amount to be converted
 -currencies are searchable and can be selected from dropdown.
 -results are shown in output.
--the output changes with respect to each field change.
+-the output changes with respect to change in each field.
 -throws error for unsupported currencies.
 -config.json hold all the APIs used.
+-responsiveness applied for mobile. 

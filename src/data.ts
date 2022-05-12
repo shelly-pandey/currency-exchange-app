@@ -1,3 +1,4 @@
+//Data created for future reference 
 export const currencyData = 
 [
     {

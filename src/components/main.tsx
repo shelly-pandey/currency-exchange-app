@@ -60,16 +60,19 @@ export default function Main() {
 
 
   const handleChangeBaseCurrency = useCallback((event: any, value: any) => {
+    if(!value) {setToAmount(undefined)}
     dispatch(getBaseCurrency(value));
   }, [dispatch]
   );
 
   const handleChangeTargetCurrency = useCallback((event: any, value: any) => {
+    if(!value) {setToAmount(undefined)}
     dispatch(getTargetCurrency(value));
   }, [dispatch]
   );
 
   const handleChangeAmount = useCallback((event: any) => {
+    if(!event.target.value) {setToAmount(undefined)}
     dispatch(getFromAmount(event.target.value));
   }, [dispatch]
   );
