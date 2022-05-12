@@ -2,17 +2,17 @@ import { CurrencyActions} from './action';
 
 //specified types for initial state
 type InitialState = {
-    currencyList: any[],
-    baseCurrency: string,
-    targetCurrency: string,
-    fromAmount: any,
-    toAmount: any
+    currencyList: string[],
+    baseCurrency: string ,
+    targetCurrency: string ,
+    fromAmount: number,
+    toAmount: number
 };
 
 const initialState: InitialState = {
     currencyList: [],
     baseCurrency: '',
-    targetCurrency: '',
+    targetCurrency: '' ,
     fromAmount: 1,
     toAmount: 0
 };

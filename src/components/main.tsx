@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { rootState } from '../redux/currencyReducer';
 import configData from '../config.json';
 
+
 import { getBaseCurrency, getFromAmount, getTargetCurrency } from "../redux/action";
 
 import Box from '@mui/material/Box';
@@ -29,7 +30,7 @@ export default function Main() {
   //fetching the conversion result . 
   useEffect(() => {
     if (fromAmount && baseCurrency && targetCurrency) {
-      let url = configData.GET_EXCHANGE_RATE_URL.concat(baseCurrency).concat("/").concat(targetCurrency).concat("/").concat(fromAmount);
+      let url = configData.GET_EXCHANGE_RATE_URL.concat(baseCurrency).concat("/").concat(targetCurrency).concat("/").concat(fromAmount.toString());
       console.log(url);
       fetch(url)
         .then((response) => {
@@ -100,7 +101,6 @@ export default function Main() {
             id="base-currency"
             options={currencies}
             sx={{ width: 300 }}
-
             onChange={handleChangeBaseCurrency}
             renderInput={(currency) => <TextField {...currency} label="Select currency from..." />}
           />
