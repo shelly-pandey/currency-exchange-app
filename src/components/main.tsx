@@ -124,7 +124,7 @@ export default function Main() {
       <svg className="bounce" data-testid=""><ArrowDropDownCircleIcon fontSize="small"/></svg>
 
       <Box component="form" sx={{ m: 1, width: '25ch' }} >
-        Output:  {toAmount}  <div className="error"> {error}</div>
+        Output:  {toAmount} {targetCurrency} <div className="error"> {error}</div>
       </Box>
 
     </div>
