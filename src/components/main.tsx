@@ -28,8 +28,8 @@ export default function Main() {
   //fetching the conversion result . 
   useEffect(() => {
     if (fromAmount && baseCurrency && targetCurrency) {
-      let url = configData.GET_EXCHANGE_RATE_URL.concat(baseCurrency).concat("/").concat(targetCurrency).concat("/").concat(fromAmount.toString());
-      console.log(url);
+      let url = configData.GET_EXCHANGE_RATE_URL.concat(baseCurrency).concat("/").concat(targetCurrency)
+      .concat("/").concat(fromAmount.toString());
       fetch(url)
         .then((response) => {
           if (response.ok) { return response.json(); }
@@ -39,24 +39,21 @@ export default function Main() {
             response.json()
               .then(errorResponse => {
                 console.log(' error ' + JSON.stringify(errorResponse));
-                setError(errorResponse["error-type"])
-                //setError('unsupported currency')
+                setError(errorResponse["error-type"]);
               })
           }
 
         })
         .then((data) => {
           setError(undefined);
-          data && setToAmount(data.conversion_result)
+          data && setToAmount((data.conversion_result.toFixed(2)));
         })
         .catch((error) => {
-          console.log('****************** ' + error)
+          console.log(' error ' + error);
         });
     }
     // dipatching all rows .Any changes in a row will reflect in the output
   }, [dispatch, fromAmount, baseCurrency, targetCurrency]);
-
-
 
   const handleChangeBaseCurrency = useCallback((event: any, value: any) => {
     if (!value) { setToAmount(0) }
