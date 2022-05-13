@@ -1,17 +1,15 @@
 import { useEffect, useState, useCallback } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { rootState } from '../redux/currencyReducer';
-import configData from '../config.json';
-
-
-import { getBaseCurrency, getFromAmount, getTargetCurrency } from "../redux/action";
 
 import Box from '@mui/material/Box';
 import FormControl from '@mui/material/FormControl';
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
-
 import ArrowDropDownCircleIcon from '@mui/icons-material/ArrowDropDownCircle';
+
+import { rootState } from '../redux/currencyReducer';
+import configData from '../config.json';
+import { getBaseCurrency, getFromAmount, getTargetCurrency } from "../redux/action";
 
 
 
@@ -23,9 +21,9 @@ export default function Main() {
   let baseCurrency = useSelector((state: rootState) => state.baseCurrency);
   let targetCurrency = useSelector((state: rootState) => state.targetCurrency);
   let fromAmount = useSelector((state: rootState) => state.fromAmount);
-  const [toAmount, setToAmount] = useState();
-  const [error, setError] = useState('');
-  
+  const [toAmount, setToAmount] = useState(0);
+  const [error, setError] = useState();
+
 
   //fetching the conversion result . 
   useEffect(() => {
@@ -37,43 +35,43 @@ export default function Main() {
           if (response.ok) { return response.json(); }
 
           else {
-            setToAmount(undefined);
-            response.text()
+            setToAmount(0);
+            response.json()
               .then(errorResponse => {
-                console.log(' error ' + errorResponse);
-                //setError(errorResponse)
-                setError('unsupported currency')
+                console.log(' error ' + JSON.stringify(errorResponse));
+                setError(errorResponse["error-type"])
+                //setError('unsupported currency')
               })
           }
 
         })
-        .then((data) => { 
-          setError(''); 
+        .then((data) => {
+          setError(undefined);
           data && setToAmount(data.conversion_result)
-         })
+        })
         .catch((error) => {
           console.log('****************** ' + error)
         });
     }
-  // dipatching all rows .Any changes in a row will reflect in the output
+    // dipatching all rows .Any changes in a row will reflect in the output
   }, [dispatch, fromAmount, baseCurrency, targetCurrency]);
 
 
 
   const handleChangeBaseCurrency = useCallback((event: any, value: any) => {
-    if(!value) {setToAmount(undefined)}
+    if (!value) { setToAmount(0) }
     dispatch(getBaseCurrency(value));
   }, [dispatch]
   );
 
   const handleChangeTargetCurrency = useCallback((event: any, value: any) => {
-    if(!value) {setToAmount(undefined)}
+    if (!value) { setToAmount(0) }
     dispatch(getTargetCurrency(value));
   }, [dispatch]
   );
 
   const handleChangeAmount = useCallback((event: any) => {
-    if(!event.target.value) {setToAmount(undefined)}
+    if (!event.target.value) { setToAmount(0) }
     dispatch(getFromAmount(event.target.value));
   }, [dispatch]
   );
@@ -82,7 +80,7 @@ export default function Main() {
   return (
     <div className="form">
       <h1>Currency Converter</h1>
-      
+
       <Box
         component="form"
         sx={{
@@ -107,7 +105,7 @@ export default function Main() {
 
         </FormControl>
       </Box>
-      
+
       <Box sx={{ minWidth: 220 }}>
         <FormControl sx={{ m: 1, minWidth: 80 }}>
           <Autocomplete
@@ -121,10 +119,12 @@ export default function Main() {
           />
         </FormControl>
       </Box>
-      <svg className="bounce" data-testid=""><ArrowDropDownCircleIcon fontSize="small"/></svg>
+      <svg className="bounce" data-testid=""><ArrowDropDownCircleIcon fontSize="small" /></svg>
 
       <Box component="form" sx={{ m: 1, width: '25ch' }} >
-        Output:  {toAmount} {targetCurrency} <div className="error"> {error}</div>
+        {
+          error ? <div className="error"> {error}</div> : <div>Output:  {toAmount} {targetCurrency}</div>
+        }
       </Box>
 
     </div>

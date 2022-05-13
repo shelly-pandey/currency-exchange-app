@@ -15,5 +15,5 @@
 -results are shown in output.
 -the output changes with respect to change in each field.
 -throws error for unsupported currencies.
--config.json hold all the APIs used.
+-config.json hold all the APIs used(although information like API key and user credentials is supposed to be in .env)
 -responsiveness applied for mobile. 
