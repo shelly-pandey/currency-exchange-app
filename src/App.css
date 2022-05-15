@@ -42,25 +42,22 @@ svg{
 }
 .bounce {
   
-  animation: bounce 10s infinite; 
+  animation: bounce 5s infinite; 
 }
+
 
 @keyframes bounce {
-  0%,
-  25%,
-  50%,
-  75%,
+  
+  25% {
+    transform: translateY(20px);
+  }
+  65% {
+    transform: translateY(-10px);
+  }
   100% {
-    transform: translateY(0);
-  }
-  40% {
-    transform: translateY(-20px);
-  }
-  60% {
-    transform: translateY(-12px);
+    transform: translateY(10px);
   }
 }
-
  
 Footer {
   border-color: lightslategrey;
