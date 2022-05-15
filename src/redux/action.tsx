@@ -16,7 +16,7 @@ export type GetCurrenciesAction = {
 export function getCurrencies(currencyList: string[]): GetCurrenciesAction {
     currencyList = currencyList.map((currency) => {
         return currency[0];
-        // return {label: currency[0].concat('-').concat(currency[1]), value: currency[0]}
+        // return {code: currency[0].concat('-').concat(currency[1]), name: currency[1]}
     });
     //Added unsupported currency to check the error
     currencyList.push("KPW");

@@ -1,4 +1,4 @@
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useState, useCallback} from "react";
 import { useSelector, useDispatch } from "react-redux";
 
 import Box from '@mui/material/Box';
@@ -55,19 +55,19 @@ export default function Main() {
     // dipatching all rows .Any changes in a row will reflect in the output
   }, [dispatch, fromAmount, baseCurrency, targetCurrency]);
 
-  const handleChangeBaseCurrency = useCallback((event: any, value: any) => {
+  const handleChangeBaseCurrency = useCallback((event:React.SyntheticEvent<Element>, value: any) => {
     if (!value) { setToAmount(0) }
     dispatch(getBaseCurrency(value));
   }, [dispatch]
   );
 
-  const handleChangeTargetCurrency = useCallback((event: any, value: any) => {
+  const handleChangeTargetCurrency = useCallback((event: React.SyntheticEvent<Element>, value: any) => {
     if (!value) { setToAmount(0) }
     dispatch(getTargetCurrency(value));
   }, [dispatch]
   );
 
-  const handleChangeAmount = useCallback((event: any) => {
+  const handleChangeAmount = useCallback((event:any) => {
     if (!event.target.value) { setToAmount(0) }
     dispatch(getFromAmount(event.target.value));
   }, [dispatch]
